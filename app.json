@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "appPI",
+    "slug": "appPI",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  },
+  "name": "appPI"
+}
