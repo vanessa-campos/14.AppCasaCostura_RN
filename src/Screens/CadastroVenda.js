@@ -25,15 +25,15 @@ export class Cadastro extends Component {
 
     constructor(props) {
         super(props)
-        this.state = {
-            Nome: "", Tamanho: "", Valor: "", Quantidade: "", ValorTotal: "",
-            Data: new Date().toDateString,
+        this.state = {           
+            Nome: "", Quantidade: "", ValorTotal: "", Data: "",    
+            // Data: new Date().toDateString,
             listaVendas: [], listaProdutos: [],
         }
     }
 
-    CadastrarVenda = (Nome, Valor, Quantidade, ValorTotal, Data) => {
-        const novaVenda = new Venda(Nome, Valor, Quantidade, ValorTotal, Data)
+    CadastrarVenda = (Nome, Quantidade, ValorTotal, Data) => {
+        const novaVenda = new Venda(Nome, Quantidade, ValorTotal, Data)
         const banco = new Database()
         banco.InserirVenda(novaVenda)
         banco.ListarVendas().then(lista => { this.setState({ listaVendas: lista }) })
@@ -59,15 +59,11 @@ export class Cadastro extends Component {
 
                 <TextInput style={form.input} placeholder=" Nome do Produto"
                     onChangeText={(valor) => { this.setState({ Nome: valor }) }} />
-                <TextInput style={form.input} placeholder=" Tamanho"
-                    onChangeText={(valor) => { this.setState({ Tamanho: valor }) }} />
-                <TextInput style={form.input} placeholder=" Valor (R$)"
-                    onChangeText={(valor) => { this.setState({ Valor: valor }) }} />
                 <TextInput style={form.input} placeholder=" Quantidade"
                     onChangeText={(valor) => { this.setState({ Quantidade: valor }) }} />
                 <TextInput style={form.input} placeholder=" Valor Total(R$)"
                     onChangeText={(valor) => { this.setState({ ValorTotal: valor }) }} />  
-                <TextInput style={form.input} placeholder="Data de Entrega (XX/XX/XXXX)"
+                <TextInput style={form.input} placeholder="Data (XX/XX/XXXX)"
                     onChangeText={(valor) => { this.setState({ Data: valor }) }} />
 
                 {/* <TextInput style={form.input} placeholder={this.state.Data}
@@ -75,8 +71,8 @@ export class Cadastro extends Component {
 
                 <TouchableOpacity style={form.button}
                     onPress={() => {
-                        this.CadastrarVenda(this.state.Nome, this.state.Valor, this.state.Quantidade, 
-                        this.state.ValorTotal, this.state.Data, this.state.Tamanho),
+                        this.CadastrarVenda(this.state.Nome, this.state.Quantidade, 
+                        this.state.ValorTotal, this.state.Data ),
                         this.props.navigation.navigate('ListaVendas')
                     }}>
                     <Text style={form.text}>Salvar</Text>

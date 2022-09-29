@@ -80,31 +80,13 @@ const form = StyleSheet.create({
 })
 const itemLista = StyleSheet.create({
     container: {
-        paddingVertical: 10, marginBottom: 5, alignItems: 'center', flexDirection: 'row', 
-        justifyContent: 'space-around', borderBottomColor: '#F06EAA',
-        borderBottomWidth: 1, borderTopColor: '#F06EAA', borderTopWidth: 1
-    },
-    container1: {
-        width: 80
-    },
-    container2: {
-        textAlign: 'left', flexDirection: 'row', width: 140, alignContent: 'center', marginHorizontal: 5
-    },
-    container3: {
-        flexDirection: 'column', width: 30, 
-    },
-    text1: {
-        fontWeight: '400', fontSize: 12, marginEnd: 10, minWidth: 30, textTransform: 'uppercase'
-    },
-    text2: {
-        fontSize: 12, fontWeight: '700', color: 'white', textAlign: 'center'
+        paddingVertical: 10, marginBottom: 5, 
+        borderBottomColor: '#F06EAA', borderBottomWidth: 1, 
+        borderTopColor: '#F06EAA', borderTopWidth: 1
     },
     icon: {
         width: 25, height: 25, tintColor: '#F06EAA', marginVertical: 5, 
     },
-    image:{
-        height: 80, width: 90, borderColor: '#B3ADAD', borderWidth: 1,
-    },  
 })
 const cam = StyleSheet.create({
     container: {

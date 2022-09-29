@@ -3,7 +3,7 @@ import SQLite from "react-native-sqlite-storage";
 SQLite.DEBUG(true); 
 SQLite.enablePromise(true);
 
-const database_name = "casadacostura.db"; 
+const database_name = "casa_da_costura.db"; 
 const database_version = "1.0"; 
 const database_displayname = "Gerenciamento Casa Costura";
 const database_size = 100000;
@@ -41,7 +41,7 @@ export default class Database{
                             console.log("Erro Recebido: ", error);
                             console.log("O Banco de dados não está pronto ... Criando Dados");
                             db.transaction((tx) => {
-                                tx.executeSql('CREATE TABLE IF NOT EXISTS Venda (id INTEGER PRIMARY KEY AUTOINCREMENT, Nome VARCHAR(50), Tamanho VARCHAR(50), Valor VARCHAR(10), Quantidade INT(9), ValorTotal VARCHAR(10), Data VARCHAR(10) )');
+                                tx.executeSql('CREATE TABLE IF NOT EXISTS Venda (id INTEGER PRIMARY KEY AUTOINCREMENT, Nome VARCHAR(50), Quantidade INT(9), ValorTotal VARCHAR(10), Data VARCHAR(10) )');
                             }).then(() => {
                                 console.log("Tabela criada com Sucesso");                
                             }).catch(error => {                    
@@ -183,7 +183,7 @@ export default class Database{
         return new Promise((resolve) => {    
             this.Conectar().then((db) => {      
                 db.transaction((tx) => {      
-                    tx.executeSql('INSERT INTO Venda(Nome, Tamanho, Valor, Quantidade, ValorTotal, Data) VALUES (?, ?, ?, ?, ?, ?, ?)', [venda.Nome, venda.Tamanho, venda.Valor, venda.Quantidade, venda.ValorTotal, venda.Data]).then(([tx, results]) => { 
+                    tx.executeSql('INSERT INTO Venda(Nome, Quantidade, ValorTotal, Data) VALUES (?, ?, ?, ?)', [venda.Nome, venda.Quantidade, venda.ValorTotal, venda.Data]).then(([tx, results]) => { 
                         resolve(results);        
                     });      
                 }).then((result) => {        
@@ -207,8 +207,8 @@ export default class Database{
                     var len = results.rows.length;          
                     for (let i = 0; i < len; i++) {            
                         let row = results.rows.item(i);            
-                        const { id, Nome, Tamanho, Valor, Quantidade, ValorTotal, Data } = row;
-                        listaVendas.push({id, Nome, Tamanho, Valor, Quantidade, ValorTotal, Data});
+                        const { id, Nome, Quantidade, ValorTotal, Data } = row;
+                        listaVendas.push({id, Nome, Quantidade, ValorTotal, Data});
                     }
                     resolve(listaVendas);
                 });
@@ -222,41 +222,41 @@ export default class Database{
         });
     });
     }
-    DeletarVenda(id) {  
-        return new Promise((resolve) => {    
-            this.Conectar().then((db) => {      
-                db.transaction((tx) => {    
-                    tx.executeSql('DELETE FROM Venda WHERE id = ?', [id]).then(([tx, results]) => {          
-                        console.log(results);          
-                        resolve(results);        
-                    });      
-                }).then((result) => {        
-                    this.Desconectar(db);      
-                }).catch((err) => {        
-                    console.log(err);      
-                });    
-            }).catch((err) => {      
-                console.log(err);    
-            });  
-        });  
-    }    
-    EditarVenda(id) {  
-        return new Promise((resolve) => {    
-            this.Conectar().then((db) => {      
-                db.transaction((tx) => {  
-                    tx.executeSql("UPDATE Venda SET Nome = ? UPDATE Venda SET Tamanho = ? UPDATE Venda SET Valor = ? UPDATE Venda SET Quantidade = ? UPDATE Venda SET ValorTotal = ? UPDATE Venda SET Data = ?", [id]).then(([tx, results]) => {          
-                    resolve(results);        
-                });      
-            }).then((result) => {        
-                  this.Desconectar(db);      
-                }).catch((err) => {        
-                  console.log(err);      
-                });    
-            }).catch((err) => {     
-                console.log(err);    
-            });  
-        });  
-    }
+    // DeletarVenda(id) {  
+    //     return new Promise((resolve) => {    
+    //         this.Conectar().then((db) => {      
+    //             db.transaction((tx) => {    
+    //                 tx.executeSql('DELETE FROM Venda WHERE id = ?', [id]).then(([tx, results]) => {          
+    //                     console.log(results);          
+    //                     resolve(results);        
+    //                 });      
+    //             }).then((result) => {        
+    //                 this.Desconectar(db);      
+    //             }).catch((err) => {        
+    //                 console.log(err);      
+    //             });    
+    //         }).catch((err) => {      
+    //             console.log(err);    
+    //         });  
+    //     });  
+    // }    
+    // EditarVenda(id) {  
+    //     return new Promise((resolve) => {    
+    //         this.Conectar().then((db) => {      
+    //             db.transaction((tx) => {  
+    //                 tx.executeSql("UPDATE Venda SET Nome = ? UPDATE Venda SET Quantidade = ? UPDATE Venda SET ValorTotal = ? UPDATE Venda SET Data = ?", [id]).then(([tx, results]) => {          
+    //                 resolve(results);        
+    //             });      
+    //         }).then((result) => {        
+    //               this.Desconectar(db);      
+    //             }).catch((err) => {        
+    //               console.log(err);      
+    //             });    
+    //         }).catch((err) => {     
+    //             console.log(err);    
+    //         });  
+    //     });  
+    // }
 
     //--------------------------------------------COSTURA----------------------------------------------
     InserirCostura(costura) {  
