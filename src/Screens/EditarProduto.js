@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import { Text, TouchableOpacity, View, TextInput, Image } from 'react-native';
-import { form, header, footer } from '../styles';
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
-import { faAngleDown, faArrowLeftLong, faDatabase } from '@fortawesome/free-solid-svg-icons';
+import { Text, TouchableOpacity, View, TextInput, Image, ScrollView } from 'react-native';
+import { form } from '../styles';
 import Database from '../database/Database'
 import Produto from '../models/Produto'
 
@@ -22,7 +20,8 @@ export class Editar extends Component {
 
     render() {
         return (
-            <View style={form.container3}>
+            <View style={form.container1}>
+
                 <TextInput style={form.input} placeholder="Categoria (Aviamentos/Tecidos)"
                     onChangeText={(valor) => { this.setState({ Categoria: valor }) }} />
                 <TextInput style={form.input} placeholder=" Nome do Produto"
@@ -37,6 +36,7 @@ export class Editar extends Component {
                     onChangeText={(valor) => { this.setState({ Unidade: valor }) }} />
                 <TextInput style={form.input} placeholder=" Quantidade"
                     onChangeText={(valor) => { this.setState({ Quantidade: valor }) }} />
+
                 <TouchableOpacity style={form.button}
                     onPress={() => {
                         this.CadastrarProduto(this.state.Categoria, this.state.Nome, this.state.Descricao,
@@ -59,22 +59,16 @@ export class Editar extends Component {
 export default function EditarProduto({ navigation }) {
 
     return (
-        <View style={form.background}>
-            <View style={header.container}>
-                <Image source={require('../images/logo.png')} style={header.image} />
-            </View>
-            <View style={form.container1}>
-                <View style={form.container2}>
-                    <TouchableOpacity onPress={() => navigation.navigate('Home')} style={form.icon}>
-                        <FontAwesomeIcon icon={faArrowLeftLong} color={'#999'} size={15} />
+        <ScrollView style={{ flex: 1, backgroundColor: '#FFCEE7' }}>
+            <View style={form.background}>
+                <View style={form.containerTitle}>
+                    <TouchableOpacity onPress={() => navigation.navigate('ListaProdutos')}>
+                        <Image source={require('../images/voltar.png')} style={form.icon} />
                     </TouchableOpacity>
                     <View style={form.containerTitle}><Text style={form.title}>EDITAR PRODUTO</Text></View>
                 </View>
-                <Cadastro />
+                <Editar />
             </View>
-            <View style={footer.container}>
-                <Text style={footer.text}>© 2022 - A Casa da Costura   Todos os direitos reservados</Text>
-            </View>
-        </View>
+        </ScrollView>
     )
 }
