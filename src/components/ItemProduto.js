@@ -13,6 +13,7 @@ export default function ItemProduto({ item }) {
                         <Text style={style.textTitle}>Id:</Text>
                         <Text style={style.textTitle}>Categoria:</Text>
                         <Text style={style.textTitle}>Nome:</Text>
+                        <Text style={style.textTitle}>Descrição:</Text>
                         <Text style={style.textTitle}>Tamanho:</Text>
                         <Text style={style.textTitle}>Valor (R$):</Text>
                         <Text style={style.textTitle}>Quantidade:</Text>
@@ -22,6 +23,7 @@ export default function ItemProduto({ item }) {
                         <Text style={style.text}>{item.id}</Text>
                         <Text style={style.text}>{item.Categoria}</Text>
                         <Text style={style.text}>{item.Nome}</Text>
+                        <Text style={style.text}>{item.Descricao}</Text>
                         <Text style={style.text}>{item.Tamanho}</Text>
                         <Text style={style.text}>{item.Valor}</Text>
                         <Text style={style.text}>{item.Quantidade}</Text>

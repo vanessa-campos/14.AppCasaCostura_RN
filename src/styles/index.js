@@ -66,7 +66,7 @@ const form = StyleSheet.create({
         flex: 1, justifyContent: 'space-evenly', alignItems: 'center', marginTop: 20
     },
     input: {
-        width: '70%', height: 30, backgroundColor: 'white', flexDirection: 'row', paddingHorizontal: 5,
+        width: '80%', height: 30, backgroundColor: 'white', flexDirection: 'row', paddingHorizontal: 5,
         justifyContent: 'space-between', alignItems: 'center', fontSize: 12, marginBottom: 5,
         borderBottomWidth: 2, borderBottomColor: 'gray', borderRightWidth: 1, borderRightColor: 'gray',
     },
@@ -88,22 +88,5 @@ const itemLista = StyleSheet.create({
         width: 25, height: 25, tintColor: '#F06EAA', marginVertical: 5, 
     },
 })
-const cam = StyleSheet.create({
-    container: {
-        flex: 1, backgroundColor: 'black', 
-    },
-    preview: {
-        height: 250, width: 220, marginBottom: 20
-    },
-    title:{
-        fontSize: 14, color: 'gray', marginVertical: 30, 
-    },
-    button: {
-        backgroundColor: 'white', borderRadius: 5, padding: 5, alignSelf: 'center', marginTop: -40,
-    },
-    text:{
-        fontSize: 12, color: 'gray', 
-    }
-})
 
-export { header, footer, sections, form, itemLista, cam };
+export { header, footer, sections, form, itemLista };

@@ -41,27 +41,27 @@ class Cadastro extends Component {
     render() {
         return (
             <View style={form.container1}>
-                <TextInput style={form.input} placeholder="Resumo"
+                <TextInput style={form.input} placeholder=" Resumo"
                     onChangeText={(valor) => { this.setState({ Resumo: valor }) }} />
-                <TextInput style={form.input} placeholder="Nome do Cliente"
+                <TextInput style={form.input} placeholder=" Nome do Cliente"
                     onChangeText={(valor) => { this.setState({ NomeCliente: valor }) }} />
-                <TextInput style={form.input} placeholder="Telefone (XX XXXXX-XXXX)"
+                <TextInput style={form.input} placeholder=" Telefone (XX XXXXX-XXXX)"
                     onChangeText={(valor) => { this.setState({ Telefone: valor }) }} />
-                <TextInput style={form.input} placeholder="Descrição"
+                <TextInput style={form.input} placeholder=" Descrição"
                     onChangeText={(valor) => { this.setState({ Descricao: valor }) }} />
-                <TextInput style={form.input} placeholder="Valor (R$)"
+                <TextInput style={form.input} placeholder=" Valor (R$)"
                     onChangeText={(valor) => { this.setState({ Valor: valor }) }} />
-                <TextInput style={form.input} placeholder="Data de Entrega (XX/XX/XXXX)"
+                <TextInput style={form.input} placeholder=" Data de Entrega (XX/XX/XXXX)"
                     onChangeText={(valor) => { this.setState({ DataEntrega: valor }) }} />
-                <TextInput style={form.input} placeholder="Pago na hora (Sim/Não)"
+                <TextInput style={form.input} placeholder=" Pago na hora (Sim/Não)"
                     onChangeText={(valor) => { this.setState({ Pago: valor }) }} />
-                <TextInput style={form.input} placeholder="Entregue (Sim/Não)"
+                <TextInput style={form.input} placeholder=" Entregue (Sim/Não)"
                     onChangeText={(valor) => { this.setState({ Entregue: valor }) }} />
                 <TouchableOpacity style={form.button}
                     onPress={() => {
                         this.CadastrarCostura(this.state.Resumo, this.state.NomeCliente, 
-                        this.state.Descricao, this.state.Valor, this.state.DataEntrega, 
-                        this.state.Pago, this.state.Entregue, this.state.Telefone),
+                        this.state.Telefone, this.state.Descricao, this.state.Valor,
+                        this.state.DataEntrega, this.state.Pago, this.state.Entregue),
                         this.props.navigation.navigate('ListaCosturas')
                     }}>
                     <Text style={form.text}>Salvar</Text>

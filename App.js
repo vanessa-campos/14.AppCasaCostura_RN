@@ -45,7 +45,7 @@ const navigation = useNavigation()
       <View style={header.container2}>
         <TouchableOpacity onPress={() => navigation.navigate('Home')} style={header.button}>
           <Image source={require('./src/images/cadastrar.png')} style={header.icon} />
-          <Text style={header.text}>Cadastros</Text>
+          <Text style={header.text}>Cadastrar</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => navigation.navigate('Listas')} style={header.button}>
           <Image source={require('./src/images/lista.png')} style={header.icon} />
