@@ -4,6 +4,7 @@ import { form } from '../styles'
 import { RNCamera } from 'react-native-camera'
 import Database from '../database/Database'
 import Produto from '../models/Produto'
+import { launchImageLibrary } from "react-native-image-picker"
 
 export default function CadastroProduto({ navigation }) {
 
@@ -52,9 +53,37 @@ export class Cadastro extends Component {
         }
     }
 
+    EscolherFoto = () => {
+        const options = {
+            noData: true,
+            title: "Foto de avaliação",
+            takePhotoButtonTitle: "Escolha uma foto",
+            chooseFromLibraryButtonTitle: "Selecione da galeria uma foto",
+            selectionLimit: 1, // Se deixar 1, será permitido apenas uma foto e 0 várias
+        }
+
+        launchImageLibrary(options, async (response) => {
+            if (response.didCancel) {
+                console.log("Usuário cancelou a seleção");
+            } else if (response.error) {
+                console.log("Ocorreu um erro.");
+            } else {
+                const photoFile = {
+                    uri: asset.uri,
+                    name: asset.fileName,
+                    type: "image/jpeg",
+                }
+                setFile(photoFile)
+                console.log(photoFile.uri)
+                this.setState({ Imagem: photoFile.uri })
+                console.log("Salva a imagem " + this.state.Imagem)
+            }
+        })
+    }
+
     render() {
         return (
-            <View style={style.container}>
+            <View style={style.container} >
                 <View style={style.container1}>
                     <TextInput style={style.input} placeholder=" Categoria (Aviamentos/Tecidos)"
                         onChangeText={(valor) => { this.setState({ Categoria: valor }) }} />
@@ -108,7 +137,10 @@ export class Cadastro extends Component {
                     />
                     <View style={{ flex: 0, flexDirection: 'row', justifyContent: 'center' }}>
                         <TouchableOpacity onPress={() => this.TirarFoto()} style={cam.button}>
-                            <Text style={cam.text}> TIRAR FOTO </Text>
+                            <Text style={cam.text}>CÂMERA</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => this.EscolherFoto()} style={cam.button}>
+                            <Text style={cam.text}>GALERIA</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -138,10 +170,10 @@ const cam = StyleSheet.create({
         height: 180, width: 160, marginVertical: 10
     },
     title: {
-        fontSize: 14, color: 'gray', 
+        fontSize: 14, color: 'gray',
     },
     button: {
-        backgroundColor: 'white', borderRadius: 5, padding: 5, alignSelf: 'center', 
+        backgroundColor: 'white', borderRadius: 5, padding: 5, alignSelf: 'center',
         borderBottomWidth: 2, borderBottomColor: 'gray', borderRightWidth: 1, borderRightColor: 'gray',
     },
     text: {

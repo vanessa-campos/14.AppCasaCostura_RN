@@ -61,7 +61,7 @@ export class Cadastro extends Component {
                     onChangeText={(valor) => { this.setState({ Nome: valor }) }} />
                 <TextInput style={form.input} placeholder=" Quantidade"
                     onChangeText={(valor) => { this.setState({ Quantidade: valor }) }} />
-                <TextInput style={form.input} placeholder=" Valor Total(R$)"
+                <TextInput style={form.input} placeholder=" Valor Total (R$)"
                     onChangeText={(valor) => { this.setState({ ValorTotal: valor }) }} />  
                 <TextInput style={form.input} placeholder=" Data (XX/XX/XXXX)"
                     onChangeText={(valor) => { this.setState({ Data: valor }) }} />
