@@ -33,11 +33,11 @@ export class Lista extends Component {
         banco.ListarVendas().then(lista => { this.setState({ listaVendas: lista }) })
     }
 
-    DeletarVenda = (id) => {
-        const banco = new Database()
-        banco.DeletarVenda(id)
-        banco.ListarVendas().then(lista => { this.setState({ listaVendas: lista }) })
-    }
+    // DeletarVenda = (id) => {
+    //     const banco = new Database()
+    //     banco.DeletarVenda(id)
+    //     banco.ListarVendas().then(lista => { this.setState({ listaVendas: lista }) })
+    // }
 
     render() {
         return (

@@ -1,9 +1,30 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { View, Text, TouchableOpacity, Image, StyleSheet } from 'react-native'
 import { itemLista } from '../styles/index'
 import { useNavigation } from '@react-navigation/native'
+import Database from '../database/Database'
+
 
 export default function ItemCostura({ item }) {
+
+    const listaCosturas = []
+
+    function Navigate(){
+        const navigation = useNavigation()
+        navigation.navigate('ListaCosturas')
+    }
+
+    function ListarCosturas() {
+        const banco = new Database()
+        banco.ListarCosturas().then(listaCosturas)
+    }
+
+    function DeletarCostura(id,navigation) {
+        const banco = new Database()
+        banco.DeletarCostura(id)
+        banco.ListarCosturas().then((lista) => { listaCosturas = lista })
+    }
+
     return (
         <View style={itemLista.container}>
             <View style={style.container}>
@@ -30,13 +51,13 @@ export default function ItemCostura({ item }) {
                     <Text style={style.text}>{item.Entregue}</Text>
                 </View>
                 <View style={style.container3}>
-                <EditButton />
-                <TouchableOpacity
-                    onPress={() => { this.props.deletar(item.id) }}>
-                    <Image source={require('../images/lixeira.png')} style={itemLista.icon} />
-                </TouchableOpacity>
+                    <EditButton />
+                    <TouchableOpacity
+                        onPress={() => { DeletarCostura(item.id), Navigate() }}>
+                        <Image source={require('../images/lixeira.png')} style={itemLista.icon} />
+                    </TouchableOpacity>
+                </View>
             </View>
-            </View>            
         </View >
     )
 }
@@ -57,7 +78,7 @@ const style = StyleSheet.create({
         flexDirection: 'row', justifyContent: 'space-around'
     },
     container1: {
-        flexDirection: 'column', 
+        flexDirection: 'column',
     },
     container2: {
         flexDirection: 'column', width: '55%',

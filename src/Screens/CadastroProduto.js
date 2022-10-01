@@ -5,20 +5,23 @@ import { RNCamera } from 'react-native-camera'
 import Database from '../database/Database'
 import Produto from '../models/Produto'
 import { launchImageLibrary } from "react-native-image-picker"
+import { Picker } from '@react-native-picker/picker'
 
 export default function CadastroProduto({ navigation }) {
 
     return (
-        <ScrollView horizontal={true} style={{ flex: 1, backgroundColor: '#FFCEE7' }}>
-            <View style={form.background}>
-                <View style={form.containerTitle}>
-                    <TouchableOpacity onPress={() => navigation.goBack()}>
-                        <Image source={require('../images/voltar.png')} style={form.icon} />
-                    </TouchableOpacity>
-                    <Text style={form.title}>PRODUTO</Text>
+        <ScrollView style={{ flex: 1 }}>
+            <ScrollView horizontal={true} style={{ flex: 1, backgroundColor: '#FFCEE7' }}>
+                <View style={form.background}>
+                    <View style={form.containerTitle}>
+                        <TouchableOpacity onPress={() => navigation.goBack()}>
+                            <Image source={require('../images/voltar.png')} style={form.icon} />
+                        </TouchableOpacity>
+                        <Text style={form.title}>PRODUTO</Text>
+                    </View>
+                    <Cadastro navigation={navigation} />
                 </View>
-                <Cadastro navigation={navigation} />
-            </View>
+            </ScrollView>
         </ScrollView>
     )
 }
@@ -85,8 +88,15 @@ export class Cadastro extends Component {
         return (
             <View style={style.container} >
                 <View style={style.container1}>
-                    <TextInput style={style.input} placeholder=" Categoria (Aviamentos/Tecidos)"
-                        onChangeText={(valor) => { this.setState({ Categoria: valor }) }} />
+                    <View style={style.input}>
+                        <Picker
+                            selectedValue={this.state.Categoria}
+                            style={form.picker}
+                            onValueChange={(itemValue, itemIndex) => { this.setState({ Categoria: itemValue }) }}>
+                            <Picker.Item label="Aviamentos" value="Aviamentos" />
+                            <Picker.Item label="Tecidos" value="Tecidos" />
+                        </Picker>
+                    </View>
                     <TextInput style={style.input} placeholder=" Nome do Produto"
                         onChangeText={(valor) => { this.setState({ Nome: valor }) }} />
                     <TextInput style={style.input} placeholder=" Descrição"
@@ -95,8 +105,16 @@ export class Cadastro extends Component {
                         onChangeText={(valor) => { this.setState({ Tamanho: valor }) }} />
                     <TextInput style={style.input} placeholder=" Valor (R$)"
                         onChangeText={(valor) => { this.setState({ Valor: valor }) }} />
-                    <TextInput style={style.input} placeholder=" Unidade (Und/Metro)"
-                        onChangeText={(valor) => { this.setState({ Unidade: valor }) }} />
+                    <View style={style.input}>
+                        <Picker
+                            selectedValue={this.state.Unidade}
+                            style={form.picker}
+                            onValueChange={(itemValue, itemIndex) => { this.setState({ Unidade: itemValue }) }}>
+                            <Picker.Item label="Und" value="Und" />
+                            <Picker.Item label="Metros" value="Metros" />
+                        </Picker>
+                    </View>
+
                     <TextInput style={style.input} placeholder=" Quantidade"
                         onChangeText={(valor) => { this.setState({ Quantidade: valor }) }} />
                     <TouchableOpacity style={form.button}
@@ -111,7 +129,7 @@ export class Cadastro extends Component {
                 </View>
 
                 <View style={style.container1}>
-                    <Text style={cam.title}>Tire uma foto do produto</Text>
+                    <Text style={cam.title}> FOTO DO PRODUTO </Text>
                     <RNCamera
                         ref={ref => {
                             this.camera = ref;
@@ -167,13 +185,13 @@ const cam = StyleSheet.create({
         flex: 1, backgroundColor: 'black',
     },
     preview: {
-        height: 180, width: 160, marginVertical: 10
+        height: 180, width: 160, 
     },
     title: {
         fontSize: 14, color: 'gray',
     },
     button: {
-        backgroundColor: 'white', borderRadius: 5, padding: 5, alignSelf: 'center',
+        backgroundColor: 'white', borderRadius: 5, padding: 5, alignSelf: 'center', marginHorizontal: 5,
         borderBottomWidth: 2, borderBottomColor: 'gray', borderRightWidth: 1, borderRightColor: 'gray',
     },
     text: {

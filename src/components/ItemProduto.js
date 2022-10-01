@@ -33,7 +33,7 @@ export default function ItemProduto({ item }) {
                 <View style={style.container3}>
                     <EditButton />
                     <TouchableOpacity
-                        onPress={() => { this.props.deletar(item.id) }}>
+                        onPress={() => {item.deletar(item.id) }}>
                         <Image source={require('../images/lixeira.png')} style={itemLista.icon} />
                     </TouchableOpacity>
                 </View>

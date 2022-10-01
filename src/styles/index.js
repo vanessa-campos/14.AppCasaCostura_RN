@@ -51,7 +51,7 @@ const sections = StyleSheet.create({
 const form = StyleSheet.create({
     background: {
         backgroundColor: '#FFE8F3', borderRadius: 15, margin: 20, flex: 1,
-        padding: 20, alignContent: 'center'
+        padding: 20, alignContent: 'center', 
     },
     containerTitle: {
         flexDirection: 'row', alignItems: 'center',  justifyContent:'flex-start',
@@ -76,6 +76,12 @@ const form = StyleSheet.create({
     },
     text: {
         fontSize: 15, fontWeight: '700', color: 'white', textAlign: 'center'
+    },  
+    text1: {
+        fontSize: 12, fontWeight: '400', color: '#999', textAlign: 'center'
+    },    
+    picker: {
+        width: 250, color: '#999', 
     }
 })
 const itemLista = StyleSheet.create({
