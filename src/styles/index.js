@@ -2,12 +2,15 @@ import { StyleSheet } from "react-native";
 
 const header = StyleSheet.create({
     container1: {
-        height: 60, backgroundColor: '#F06EAA', justifyContent: 'center', alignItems: 'center',
+        height: 80, backgroundColor: '#F06EAA', justifyContent: 'center', alignItems: 'center',
         borderBottomWidth: 2, borderBottomColor: '#FFE8F3',
     },
     image: {
-        width: 278, height: 61, marginBottom: 10
-    },    
+        width: 278, height: 61, marginBottom:0
+    },   
+    textLogo: {
+        fontSize: 10, color: 'white', fontWeight: '500', textAlign: 'center',
+    } ,
     container2: {
         backgroundColor: '#F06EAA', justifyContent: 'space-evenly', alignItems: 'center', flexDirection: 'row',
     },

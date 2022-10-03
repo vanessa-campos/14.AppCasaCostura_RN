@@ -169,7 +169,7 @@ export class Cadastro extends Component {
 
 const style = StyleSheet.create({
     container: {
-        flexDirection: 'row', padding: 20
+        flexDirection: 'row', paddingTop: 20, paddingBottom: 10
     },
     container1: {
         flexDirection: 'column', marginHorizontal: 10, alignItems: 'center', justifyContent: 'space-between'

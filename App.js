@@ -1,5 +1,5 @@
 import React from "react"
-import { View, Text, Image, TouchableOpacity } from 'react-native'
+import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native'
 import { NavigationContainer, useNavigation } from "@react-navigation/native"
 import { createStackNavigator } from "@react-navigation/stack"
 import Home from './src/Screens/Home'
@@ -13,6 +13,7 @@ import ListaProdutos from './src/Screens/ListaProdutos'
 import ListaResumo from './src/Screens/ListaResumo'
 import EditarProduto from './src/Screens/EditarProduto'
 import { header, footer } from './src/styles'
+import SplashScreen from 'react-native-splash-screen'
 
 const Stack = createStackNavigator()
 
@@ -34,15 +35,19 @@ function StackNavigator() {
 }
 
 function Header() {
-  
-const navigation = useNavigation()
+
+  const navigation = useNavigation()
 
   return (
     <View>
       <View style={header.container1}>
         <Image source={require('./src/images/logo.png')} style={header.image} />
+        <Text style={header.textLogo}>~ Gerenciamento de produtos, vendas e serviços ~</Text>
+
       </View>
+
       <View style={header.container2}>
+
         <TouchableOpacity onPress={() => navigation.navigate('Home')} style={header.button}>
           <Image source={require('./src/images/cadastrar.png')} style={header.icon} />
           <Text style={header.text}>Cadastrar</Text>
@@ -65,11 +70,20 @@ function Footer() {
 }
 
 export default function App() {
+
+  useEffect(() => { SplashScreen.hide() }, [])
+
   return (
-    <NavigationContainer style={{ flex: 1 }}>
+    <NavigationContainer style={style}>
       <Header />
       <StackNavigator />
       <Footer />
     </NavigationContainer>
   )
 }
+
+const style = StyleSheet.create({
+  container: {
+    flex: 1, paddingTop: 250, alignItems: "center"
+  }
+})
