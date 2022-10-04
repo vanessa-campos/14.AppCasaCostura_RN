@@ -41,6 +41,7 @@ const navigation = useNavigation()
     <View>
       <View style={header.container1}>
         <Image source={require('./src/images/logo.png')} style={header.image} />
+        <Text style={header.text}>Gerenciamento de produtos, vendas e serviços</Text>
       </View>
       <View style={header.container2}>
         <TouchableOpacity onPress={() => navigation.navigate('Home')} style={header.button}>
