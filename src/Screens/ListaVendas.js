@@ -33,16 +33,23 @@ export class Lista extends Component {
         banco.ListarVendas().then(lista => { this.setState({ listaVendas: lista }) })
     }
 
-    // DeletarVenda = (id) => {
-    //     const banco = new Database()
-    //     banco.DeletarVenda(id)
-    //     banco.ListarVendas().then(lista => { this.setState({ listaVendas: lista }) })
-    // }
+    DeletarVenda = (id) => {
+        const banco = new Database()
+        banco.DeletarVenda(id)
+        banco.ListarVendas().then(lista => { this.setState({ listaVendas: lista }) })
+    }
+
+    renderItem = ({item}) => {
+        return (
+            <ItemVenda key={item.id} item={item} id={item.id} Nome={item.Nome} ValorTotal={item.ValorTotal} 
+            Quantidade={item.Quantidade} Data={item.Data} deletar={this.DeletarVenda}/>
+        )
+    }
 
     render() {
         return (
             <View style={{ marginTop: 10, marginBottom: 35 }}>
-                <FlatList data={this.state.listaVendas} renderItem={(item) => ItemVenda(item)} />
+                <FlatList data={this.state.listaVendas} renderItem={this.renderItem}/>
             </View>
         )
     }

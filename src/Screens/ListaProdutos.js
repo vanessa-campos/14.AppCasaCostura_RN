@@ -40,21 +40,19 @@ export class Lista extends Component {
         banco.ListarProdutos().then(lista => { this.setState({ listaProdutos: lista }) })
     }
 
+    renderItem = ({item}) => {
+        return (
+            <ItemProduto key={item.id} item={item} id={item.id} Categoria={item.Categoria} Nome={item.Nome} 
+            Descricao={item.Descricao} Tamanho={item.Tamanho} Valor={item.Valor} Unidade={item.Unidade} 
+            Quantidade={item.Quantidade} Imagem={item.Imagem} deletar={this.DeletarProduto}/>
+        )
+    }
+
     render() {
         return (
             <View style={{ marginTop: 10, marginBottom: 35 }}>
-                <FlatList data={this.state.listaProdutos} renderItem={(item) => ItemProduto(item)} />
+                <FlatList data={this.state.listaProdutos} renderItem={this.renderItem} />
             </View>
         )
     }
 }
-
-
-{/* <ScrollView>
-    {this.state.listaProdutos.map(item => (
-        <ItemProduto key={item.id} item={item} id={item.id} Categoria={item.Categoria}
-        Nome={item.Nome} Descricao={item.Descricao} Tamanho={item.Tamanho}
-        Valor={item.Valor} Unidade={item.Unidade} Quantidade={item.Quantidade}
-        Imagem={item.Imagem} deletar={this.DeletarProduto} />
-    ))}
-</ScrollView> */}

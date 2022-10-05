@@ -3,7 +3,7 @@ import SQLite from "react-native-sqlite-storage";
 SQLite.DEBUG(true);
 SQLite.enablePromise(true);
 
-const database_name = "casa__costura.db";
+const database_name = "casa_costura.db";
 const database_version = "1.0";
 const database_displayname = "Gerenciamento Casa Costura";
 const database_size = 100000;
@@ -41,7 +41,7 @@ export default class Database {
                         console.log("Erro Recebido: ", error);
                         console.log("O Banco de dados não está pronto ... Criando Dados");
                         db.transaction((tx) => {
-                            tx.executeSql('CREATE TABLE IF NOT EXISTS Venda (id INTEGER PRIMARY KEY AUTOINCREMENT, Nome VARCHAR(50), Quantidade INT(9), ValorTotal VARCHAR(10), Data VARCHAR(10) )');
+                            tx.executeSql('CREATE TABLE IF NOT EXISTS Venda (id INTEGER PRIMARY KEY AUTOINCREMENT, Nome VARCHAR(50), Quantidade DOUBLE(9), ValorTotal DOUBLE(10), Data VARCHAR(10) )');
                         }).then(() => {
                             console.log("Tabela criada com Sucesso");
                         }).catch(error => {
@@ -245,24 +245,25 @@ export default class Database {
             });
         });
     }
-    // DeletarVenda(id) {  
-    //     return new Promise((resolve) => {    
-    //         this.Conectar().then((db) => {      
-    //             db.transaction((tx) => {    
-    //                 tx.executeSql('DELETE FROM Venda WHERE id = ?', [id]).then(([tx, results]) => {          
-    //                     console.log(results);          
-    //                     resolve(results);        
-    //                 });      
-    //             }).then((result) => {        
-    //                 this.Desconectar(db);      
-    //             }).catch((err) => {        
-    //                 console.log(err);      
-    //             });    
-    //         }).catch((err) => {      
-    //             console.log(err);    
-    //         });  
-    //     });  
-    // }    
+    
+    DeletarVenda(id) {  
+        return new Promise((resolve) => {    
+            this.Conectar().then((db) => {      
+                db.transaction((tx) => {    
+                    tx.executeSql('DELETE FROM Venda WHERE id = ?', [id]).then(([tx, results]) => {          
+                        console.log(results);          
+                        resolve(results);        
+                    });      
+                }).then((result) => {        
+                    this.Desconectar(db);      
+                }).catch((err) => {        
+                    console.log(err);      
+                });    
+            }).catch((err) => {      
+                console.log(err);    
+            });  
+        });  
+    }    
     // EditarVenda(id) {  
     //     return new Promise((resolve) => {    
     //         this.Conectar().then((db) => {      

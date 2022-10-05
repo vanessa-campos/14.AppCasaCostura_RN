@@ -34,10 +34,17 @@ export class Lista extends Component {
         banco.ListarResumo().then(lista => { this.setState({ listaResumo: lista }) })
     }
 
+    renderItem = ({item}) => {
+        return (
+            <ItemResumo key={item.id} item={item} id={item.id} Mes={item.Mes}  
+            Quantidade={item.Quantidade} Valor={item.Valor} />
+        )
+    }
+
     render() {
         return (
             <View style={{ marginTop: 10, marginBottom: 35 }}>
-                <FlatList data={this.state.listaResumo} renderItem={(item) => ItemResumo(item)} />
+                <FlatList data={this.state.listaResumo} renderItem={this.renderItem} />
             </View>
         )
     }

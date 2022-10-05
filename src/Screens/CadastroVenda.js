@@ -3,6 +3,7 @@ import { Text, TouchableOpacity, View, TextInput, ScrollView, Image } from 'reac
 import { form } from '../styles'
 import Database from '../database/Database'
 import Venda from '../models/Venda'
+import Resumo from '../models/Resumo'
 import { Picker } from '@react-native-picker/picker'
 import DatePicker from 'react-native-date-picker'
 
@@ -29,28 +30,29 @@ export class Cadastro extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            Nome: "Nome do Produto", Quantidade: "", ValorTotal: "", Data: new Date(),
-            listaVendas: [], listaNomeProdutos: [], open: false, textData2: "",
-            textData: " Data - " + new Date().toDateString() + "  [Clique para alterar] "
+            Nome: "Nome do Produto", Quantidade: 0, ValorTotal: 0, Data: new Date(),
+            listaVendas: [], listaNomeProdutos: [], open: false, Valor: 2
         }
-        this.ListarNomeProdutos()
+        this.ListarNomeProdutos
     }
 
     CadastrarVenda = (Nome, Quantidade, ValorTotal, Data) => {
         const novaVenda = new Venda(Nome, Quantidade, ValorTotal, Data)
         const banco = new Database()
         banco.InserirVenda(novaVenda)
-        banco.ListarVendas().then(lista => { this.setState({ listaVendas: lista }) })
+    }
+
+    ResumoMes = () => {
+        
+        const novoResumo = new Resumo(Mes, Quantidade, Valor)
+        const banco = new Database()
+        banco.InserirResumo(novoResumo)
     }
 
     ListarNomeProdutos = () => {
         const banco = new Database()
         banco.ListarNomeProdutos().then(lista => { this.setState({ listaNomeProdutos: lista }) })
     }
-
-    // Conta = () => {
-    //     this.setState({ ValorTotal: this.state.Valor * this.state.Quantidade })
-    // }
 
     // Filtrar = (texto) => {
     //     this.setState({ selecao: texto })
@@ -77,22 +79,18 @@ export class Cadastro extends Component {
                     </Picker>
                 </View>
                 <TextInput style={form.input} placeholder=" Quantidade"
-                    onChangeText={(valor) => { this.setState({ Quantidade: valor }) }} />
-                <TextInput style={form.input} placeholder=" Valor Total (R$)"
-                    onChangeText={(valor) => { this.setState({ ValorTotal: valor }) }} />
+                    onChangeText={(valor) => { this.setState({ Quantidade: valor, ValorTotal: this.state.Valor * valor }) }} />
+                <View style={form.input}>
+                    <Text style={form.text1}> Valor Total: R$ {this.state.Valor * this.state.Quantidade}</Text>
+                </View>
                 <TouchableOpacity style={form.input} onPress={() => { this.setState({ open: true }) }}>
-                    <Text style={form.text1}>{this.state.textData}</Text>
+                    <Text style={form.text1}> Data: {this.state.Data.toDateString()}          [Alterar data]</Text>
                 </TouchableOpacity>
                 <DatePicker
                     modal open={this.state.open}
                     mode="date" locale='pt-BR'
                     date={this.state.Data}
-                    onConfirm={(valor) => {
-                        this.setState({
-                            open: false, Data: valor,
-                            textData: this.state.Data.toDateString()
-                        })
-                    }}
+                    onConfirm={(valor) => { this.setState({ open: false, Data: valor }) }}
                     onCancel={() => { this.setState({ open: false }) }}
                 />
                 <TouchableOpacity style={form.button}

@@ -1,65 +1,48 @@
-import React, { useState } from 'react'
+import React, { Component } from 'react'
 import { View, Text, TouchableOpacity, Image, StyleSheet } from 'react-native'
 import { itemLista } from '../styles/index'
 import { useNavigation } from '@react-navigation/native'
 import Database from '../database/Database'
 
+export default class ItemCostura extends Component {
 
-export default function ItemCostura({ item }) {
-
-    const listaCosturas = []
-
-    function Navigate(){
-        const navigation = useNavigation()
-        navigation.navigate('ListaCosturas')
-    }
-
-    function ListarCosturas() {
-        const banco = new Database()
-        banco.ListarCosturas().then(listaCosturas)
-    }
-
-    function DeletarCostura(id,navigation) {
-        const banco = new Database()
-        banco.DeletarCostura(id)
-        banco.ListarCosturas().then((lista) => { listaCosturas = lista })
-    }
-
-    return (
-        <View style={itemLista.container}>
-            <View style={style.container}>
-                <View style={style.container1}>
-                    <Text style={style.textTitle}>Id:</Text>
-                    <Text style={style.textTitle}>Resumo:</Text>
-                    <Text style={style.textTitle}>Nome do Cliente:</Text>
-                    <Text style={style.textTitle}>Telefone:</Text>
-                    <Text style={style.textTitle}>Descrição:</Text>
-                    <Text style={style.textTitle}>Valor (R$):</Text>
-                    <Text style={style.textTitle}>Data de Entrega:</Text>
-                    <Text style={style.textTitle}>Pago:</Text>
-                    <Text style={style.textTitle}>Entregue:</Text>
+    render() {
+        return (
+            <View style={itemLista.container}>
+                <View style={style.container}>
+                    <View style={style.container1}>
+                        <Text style={style.textTitle}>Id:</Text>
+                        <Text style={style.textTitle}>Resumo:</Text>
+                        <Text style={style.textTitle}>Nome do Cliente:</Text>
+                        <Text style={style.textTitle}>Telefone:</Text>
+                        <Text style={style.textTitle}>Descrição:</Text>
+                        <Text style={style.textTitle}>Valor:</Text>
+                        <Text style={style.textTitle}>Data de Entrega:</Text>
+                        <Text style={style.textTitle}>Pago:</Text>
+                        <Text style={style.textTitle}>Entregue:</Text>
+                    </View>
+                    <View style={style.container2}>
+                        <Text style={style.text}>{this.props.id}</Text>
+                        <Text style={style.text}>{this.props.Resumo}</Text>
+                        <Text style={style.text}>{this.props.NomeCliente}</Text>
+                        <Text style={style.text}>{this.props.Telefone}</Text>
+                        <Text style={style.text}>{this.props.Descricao}</Text>
+                        <Text style={style.text}>R$ {this.props.Valor}</Text>
+                        <Text style={style.text}>{this.props.DataEntrega}</Text>
+                        <Text style={style.text}>{this.props.Pago}</Text>
+                        <Text style={style.text}>{this.props.Entregue}</Text>
+                    </View>
+                    <View style={style.container3}>
+                        <EditButton />
+                        <TouchableOpacity
+                            onPress={() => { this.props.deletar(this.props.id) }}>
+                            <Image source={require('../images/lixeira.png')} style={itemLista.icon} />
+                        </TouchableOpacity>
+                    </View>
                 </View>
-                <View style={style.container2}>
-                    <Text style={style.text}>{item.id}</Text>
-                    <Text style={style.text}>{item.Resumo}</Text>
-                    <Text style={style.text}>{item.NomeCliente}</Text>
-                    <Text style={style.text}>{item.Telefone}</Text>
-                    <Text style={style.text}>{item.Descricao}</Text>
-                    <Text style={style.text}>{item.Valor}</Text>
-                    <Text style={style.text}>{item.DataEntrega}</Text>
-                    <Text style={style.text}>{item.Pago}</Text>
-                    <Text style={style.text}>{item.Entregue}</Text>
-                </View>
-                <View style={style.container3}>
-                    <EditButton />
-                    <TouchableOpacity
-                        onPress={() => { DeletarCostura(item.id), Navigate() }}>
-                        <Image source={require('../images/lixeira.png')} style={itemLista.icon} />
-                    </TouchableOpacity>
-                </View>
-            </View>
-        </View >
-    )
+            </View >
+        )
+    }
 }
 
 function EditButton() {

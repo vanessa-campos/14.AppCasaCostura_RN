@@ -153,6 +153,7 @@ export class Cadastro extends Component {
                             console.log(barcodes);
                         }}
                     />
+                    {/* <Text style={cam.text}>{this.state.Imagem}</Text> */}
                     <View style={{ flex: 0, flexDirection: 'row', justifyContent: 'center' }}>
                         <TouchableOpacity onPress={() => this.TirarFoto()} style={cam.button}>
                             <Text style={cam.text}>CÂMERA</Text>
@@ -185,16 +186,16 @@ const cam = StyleSheet.create({
         flex: 1, backgroundColor: 'black',
     },
     preview: {
-        height: 180, width: 160, 
+        height: 180, width: 160, marginVertical: 20
     },
     title: {
         fontSize: 14, color: 'gray',
     },
     button: {
-        backgroundColor: 'white', borderRadius: 5, padding: 5, alignSelf: 'center', marginHorizontal: 5,
+        backgroundColor: 'white', borderRadius: 5, padding: 5, marginHorizontal: 5, marginTop: 10,
         borderBottomWidth: 2, borderBottomColor: 'gray', borderRightWidth: 1, borderRightColor: 'gray',
     },
     text: {
-        fontSize: 12, color: 'gray',
+        fontSize: 12, color: 'gray', maxWidth: 160, textAlign: 'center'
     }
 })

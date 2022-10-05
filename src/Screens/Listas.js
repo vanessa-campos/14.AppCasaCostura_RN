@@ -20,10 +20,10 @@ export default function Listas({ navigation }) {
                         onPress={() => navigation.navigate('ListaCosturas')} style={sections.button}>
                         <Text style={sections.text}>Costuras</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity 
+                    {/* <TouchableOpacity 
                         onPress={() => navigation.navigate('ListaResumo')} style={sections.button}>
                         <Text style={sections.text}>Resumo do Mês</Text>
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
                 </View>
             </ScrollView>
         </View>

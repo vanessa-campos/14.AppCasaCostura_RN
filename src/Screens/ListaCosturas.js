@@ -34,12 +34,24 @@ export class Lista extends Component {
         banco.ListarCosturas().then(lista => { this.setState({ listaCosturas: lista }) })
     }
 
+    DeletarCostura = (id) => {
+        const banco = new Database()
+        banco.DeletarCostura(id)
+        this.ListarCosturas()
+    }
+
+    renderItem = ({item}) => {
+        return (
+            <ItemCostura key={item.id} item={item} id={item.id} Resumo={item.Resumo} NomeCliente={item.NomeCliente} 
+            Telefone={item.Telefone} Descricao={item.Descricao} Valor={item.Valor} DataEntrega={item.DataEntrega} 
+            Pago={item.Pago} Entregue={item.Entregue} deletar={this.DeletarCostura}/>
+        )
+    }
+
     render() {
         return (
             <View style={{ marginTop: 10, marginBottom: 35 }}>
-                <FlatList 
-                    data={this.state.listaCosturas} 
-                    renderItem={(item) => ItemCostura(item)} />
+                <FlatList data={this.state.listaCosturas} renderItem={this.renderItem}/>
             </View>
         )
     }

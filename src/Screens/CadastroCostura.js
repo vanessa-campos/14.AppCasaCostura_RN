@@ -28,8 +28,7 @@ class Cadastro extends Component {
         super(props)
         this.state = {
             Resumo: "", NomeCliente: "", Telefone: "", Descricao: "", open: false, listaCosturas: [],
-            Valor: "", DataEntrega: new Date(), Pago: false, Entregue: false, PagoText: "não", EntregueText: "não",
-            textData: " Data - " + new Date().toDateString() + "  [Clique para alterar] "
+            Valor: 0, DataEntrega: new Date(), Pago: false, Entregue: false, PagoText: "", EntregueText: ""
         }
     }
 
@@ -40,11 +39,9 @@ class Cadastro extends Component {
         banco.InserirCostura(novaCostura)
     }
 
-    verificarBoolPago = () => {
-        this.state.Pago ? this.state.PagoText = "não" : this.state.PagoText = "sim"
-    }
-    verificarBoolEntregue = () => {
-        this.state.Entregue ? this.state.EntregueText = "não" : this.state.EntregueText = "sim"
+    CheckBools = () => {
+        this.state.Pago ? this.state.PagoText = "sim" : this.state.PagoText = "não"
+        this.state.Entregue ? this.state.EntregueText = "sim" : this.state.EntregueText = "não"
     }
 
     render() {
@@ -61,7 +58,7 @@ class Cadastro extends Component {
                 <TextInput style={form.input} placeholder=" Valor (R$)"
                     onChangeText={(valor) => { this.setState({ Valor: valor }) }} />
                 <TouchableOpacity style={form.input} onPress={() => { this.setState({ open: true }) }}>
-                    <Text style={form.text1}>{this.state.textData}</Text>
+                    <Text style={form.text1}> Data: {this.state.DataEntrega.toDateString()}           [Alterar data]</Text>
                 </TouchableOpacity>
                 <DatePicker
                     modal open={this.state.open}
@@ -69,41 +66,35 @@ class Cadastro extends Component {
                     date={this.state.DataEntrega}
                     onConfirm={(valor) => {
                         this.setState({
-                            open: false, DataEntrega: valor,
-                            textData: this.state.DataEntrega.toDateString()
+                            open: false, DataEntrega: valor
                         })
                     }}
                     onCancel={() => { this.setState({ open: false }) }}
                 />
                 <View style={form.input}>
-                    <Text style={form.text1}> Pago na hora                     Não  </Text>
+                    <Text style={form.text1}> Pago na hora                   Não  </Text>
                     <Switch
                         trackColor={{ false: "#999", true: "#FFCEE7" }}
                         thumbColor={this.state.Pago ? "#F06EAA" : "#FFCEE7"}
-                        onValueChange={() => {
-                            this.setState({ Pago: !this.state.Pago }),
-                                this.verificarBoolPago()
-                        }}
+                        onValueChange={() => {this.setState({ Pago: !this.state.Pago })}}
                         value={this.state.Pago}
                     />
-                    <Text style={form.text1}>Sim</Text>
+                    <Text style={form.text1}>Sim  </Text>
                 </View>
                 <View style={form.input}>
-                    <Text style={form.text1}> Entregue                             Não  </Text>
+                    <Text style={form.text1}> Entregue                           Não  </Text>
                     <Switch
                         trackColor={{ false: "#999", true: "#FFCEE7" }}
                         thumbColor={this.state.Entregue ? "#F06EAA" : "#FFCEE7"}
-                        onValueChange={() => {
-                            this.setState({ Entregue: !this.state.Entregue }),
-                                this.verificarBoolEntregue()
-                        }}
+                        onValueChange={() => {this.setState({ Entregue: !this.state.Entregue })}}
                         value={this.state.Entregue}
                     />
-                    <Text style={form.text1}>Sim</Text>
+                    <Text style={form.text1}>Sim  </Text>
                 </View>
 
                 <TouchableOpacity style={form.button}
                     onPress={() => {
+                        this.CheckBools()
                         this.CadastrarCostura(this.state.Resumo, this.state.NomeCliente,
                             this.state.Telefone, this.state.Descricao, this.state.Valor,
                             this.state.DataEntrega.toDateString(), this.state.PagoText,
