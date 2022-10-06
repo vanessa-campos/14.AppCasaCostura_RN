@@ -64,21 +64,13 @@ export class Cadastro extends Component {
             chooseFromLibraryButtonTitle: "Selecione da galeria uma foto",
             selectionLimit: 1, // Se deixar 1, será permitido apenas uma foto e 0 várias
         }
-
-        launchImageLibrary(options, async (response) => {
+        launchImageLibrary(options, (response) => {
             if (response.didCancel) {
                 console.log("Usuário cancelou a seleção");
             } else if (response.error) {
-                console.log("Ocorreu um erro.");
+                console.log("Ocorreu um erro: ", response.errorMessage);
             } else {
-                const photoFile = {
-                    uri: asset.uri,
-                    name: asset.fileName,
-                    type: "image/jpeg",
-                }
-                setFile(photoFile)
-                console.log(photoFile.uri)
-                this.setState({ Imagem: photoFile.uri })
+                this.setState({ Imagem: response.assets[0].uri })
                 console.log("Salva a imagem " + this.state.Imagem)
             }
         })
@@ -153,7 +145,9 @@ export class Cadastro extends Component {
                             console.log(barcodes);
                         }}
                     />
-                    {/* <Text style={cam.text}>{this.state.Imagem}</Text> */}
+                    {this.state.Imagem == "" ? 
+                        <Text style={cam.text}>Nenhuma imagem encontrada</Text> :
+                        <Text style={cam.text}>Imagem selecionada</Text>}
                     <View style={{ flex: 0, flexDirection: 'row', justifyContent: 'center' }}>
                         <TouchableOpacity onPress={() => this.TirarFoto()} style={cam.button}>
                             <Text style={cam.text}>CÂMERA</Text>

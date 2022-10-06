@@ -3,7 +3,7 @@ import SQLite from "react-native-sqlite-storage";
 SQLite.DEBUG(true);
 SQLite.enablePromise(true);
 
-const database_name = "casa_costura.db";
+const database_name = "casa__costura.db";
 const database_version = "1.0";
 const database_displayname = "Gerenciamento Casa Costura";
 const database_size = 100000;
