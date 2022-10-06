@@ -38,13 +38,19 @@ export class Lista extends Component {
         const banco = new Database()
         banco.DeletarCostura(id)
         this.ListarCosturas()
+    }  
+
+    Editar = (id) => {
+        const banco = new Database()
+        banco.FindCostura(id).then(lista => { this.setState({ listaCosturas: lista }) })
     }
 
     renderItem = ({item}) => {
         return (
-            <ItemCostura key={item.id} item={item} id={item.id} Resumo={item.Resumo} NomeCliente={item.NomeCliente} 
-            Telefone={item.Telefone} Descricao={item.Descricao} Valor={item.Valor} DataEntrega={item.DataEntrega} 
-            Pago={item.Pago} Entregue={item.Entregue} deletar={this.DeletarCostura}/>
+            <ItemCostura key={item.id} item={item} id={item.id} Resumo={item.Resumo} 
+            NomeCliente={item.NomeCliente} Telefone={item.Telefone} Descricao={item.Descricao} 
+            Valor={item.Valor} DataEntrega={item.DataEntrega} Pago={item.Pago} Entregue={item.Entregue} 
+            deletar={this.DeletarCostura} editar={this.Editar} />
         )
     }
 

@@ -34,6 +34,11 @@ export default class ItemCostura extends Component {
                     </View>
                     <View style={style.container3}>
                         <EditButton />
+                        {/* <TouchableOpacity
+                            onPress={() => { this.props.editar(this.props.id), 
+                            this.props.navigation.navigate('EditarCostura') }}>
+                            <Image source={require('../images/editar.png')} style={itemLista.icon} />
+                        </TouchableOpacity> */}
                         <TouchableOpacity
                             onPress={() => { this.props.deletar(this.props.id) }}>
                             <Image source={require('../images/lixeira.png')} style={itemLista.icon} />
@@ -50,7 +55,7 @@ function EditButton() {
 
     return (
         <TouchableOpacity
-            onPress={() => { navigation.navigate('EditarProduto') }}>
+            onPress={() => { navigation.navigate('EditarCostura') }}>
             <Image source={require('../images/editar.png')} style={itemLista.icon} />
         </TouchableOpacity>
     )

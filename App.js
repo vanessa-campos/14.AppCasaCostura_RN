@@ -11,7 +11,6 @@ import ListaVendas from './src/Screens/ListaVendas'
 import ListaCosturas from './src/Screens/ListaCosturas'
 import ListaProdutos from './src/Screens/ListaProdutos'
 import ListaResumo from './src/Screens/ListaResumo'
-import EditarProduto from './src/Screens/EditarProduto'
 import { header, footer } from './src/styles'
 
 const Stack = createStackNavigator()
@@ -28,7 +27,6 @@ function StackNavigator() {
       <Stack.Screen name="ListaCosturas" component={ListaCosturas} options={{ headerShown: false }} />
       <Stack.Screen name="ListaProdutos" component={ListaProdutos} options={{ headerShown: false }} />
       <Stack.Screen name="ListaResumo" component={ListaResumo} options={{ headerShown: false }} />
-      <Stack.Screen name="EditarProduto" component={EditarProduto} options={{ headerShown: false }} />
     </Stack.Navigator>
   )
 }

@@ -6,6 +6,7 @@ import Venda from '../models/Venda'
 import Resumo from '../models/Resumo'
 import { Picker } from '@react-native-picker/picker'
 import DatePicker from 'react-native-date-picker'
+import ItemProduto from '../components/ItemProduto';
 
 
 export default function CadastroVenda({ navigation }) {
@@ -30,54 +31,50 @@ export class Cadastro extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            Nome: "Nome do Produto", Quantidade: 0, ValorTotal: 0, Data: new Date(),
-            listaVendas: [], listaNomeProdutos: [], open: false, Valor: 2
+            Nome: "Nome do Produto", Valor: "0", Quantidade: "0", ValorTotal: "0", Data: new Date(),
+            listaProdutos: [], open: false,
         }
-        this.ListarNomeProdutos
+        this.ListarProdutos()
     }
 
-    CadastrarVenda = (Nome, Quantidade, ValorTotal, Data) => {
-        const novaVenda = new Venda(Nome, Quantidade, ValorTotal, Data)
+    CadastrarVenda = (Nome, Valor, Quantidade, ValorTotal, Data) => {
+        const novaVenda = new Venda(Nome, Valor, Quantidade, ValorTotal, Data)
         const banco = new Database()
         banco.InserirVenda(novaVenda)
     }
 
     ResumoMes = () => {
-        
+
         const novoResumo = new Resumo(Mes, Quantidade, Valor)
         const banco = new Database()
         banco.InserirResumo(novoResumo)
     }
 
-    ListarNomeProdutos = () => {
+    ListarProdutos = () => {
         const banco = new Database()
-        banco.ListarNomeProdutos().then(lista => { this.setState({ listaNomeProdutos: lista }) })
+        banco.ListarProdutos().then(lista => { this.setState({ listaProdutos: lista }) })
+        this.state.listaProdutos.map(produto => (<ItemProduto id={produto.id} Nome={produto.Nome} />))
+        console.log('Lista: ' + this.state.listaProdutos)
     }
-
-    // Filtrar = (texto) => {
-    //     this.setState({ selecao: texto })
-    //     let filtro = this.state.listaProdutos.filter(
-    //         (item) => {
-    //             return item.Nome.toLowerCase().includes(texto.toLowerCase())
-    //         }
-    //     )
-    //     this.setState({ dadosFiltrados: filtro })
-    // }
 
     render() {
         return (
             <View style={form.container1}>
-                <View style={form.input}>
-                    <Picker
+                {/* <View style={form.input}> 
+                     <Picker
                         selectedValue={this.state.Nome}
                         style={form.picker}
                         onValueChange={(itemValue, itemIndex) => { this.setState({ Nome: itemValue }) }}>
                         <Picker.Item label="Nome do Produto" value="" />
-                        {this.state.listaNomeProdutos.map((item, index) => {
+                        {this.state.listaProdutos.map((item, index) => {
                             return (<Picker.Item label={item} value={item} key={index} />)
-                        })}
-                    </Picker>
-                </View>
+                        })} 
+                    </Picker> 
+                 </View> */}
+                <TextInput style={form.input} placeholder=" Nome do Produto"
+                    onChangeText={(valor) => { this.setState({ Nome: valor }) }} />
+                <TextInput style={form.input} placeholder=" Valor do produto: R$ 0"
+                    onChangeText={(valor) => { this.setState({ Valor: valor }) }} />
                 <TextInput style={form.input} placeholder=" Quantidade"
                     onChangeText={(valor) => { this.setState({ Quantidade: valor, ValorTotal: this.state.Valor * valor }) }} />
                 <View style={form.input}>
@@ -95,7 +92,7 @@ export class Cadastro extends Component {
                 />
                 <TouchableOpacity style={form.button}
                     onPress={() => {
-                        this.CadastrarVenda(this.state.Nome, this.state.Quantidade,
+                        this.CadastrarVenda(this.state.Nome, this.state.Valor, this.state.Quantidade,
                             this.state.ValorTotal, this.state.Data.toDateString()),
                             this.props.navigation.navigate('ListaVendas')
                     }}>

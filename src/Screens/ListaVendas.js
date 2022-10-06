@@ -41,8 +41,9 @@ export class Lista extends Component {
 
     renderItem = ({item}) => {
         return (
-            <ItemVenda key={item.id} item={item} id={item.id} Nome={item.Nome} ValorTotal={item.ValorTotal} 
-            Quantidade={item.Quantidade} Data={item.Data} deletar={this.DeletarVenda}/>
+            <ItemVenda key={item.id} item={item} id={item.id} Nome={item.Nome} Valor={item.Valor}
+            ValorTotal={item.ValorTotal} Quantidade={item.Quantidade} Data={item.Data} 
+            deletar={this.DeletarVenda}/>
         )
     }
 
