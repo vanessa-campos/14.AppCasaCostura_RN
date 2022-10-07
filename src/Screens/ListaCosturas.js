@@ -15,6 +15,8 @@ export default function ListaCosturas({ navigation }) {
                     </TouchableOpacity>
                     <Text style={form.title}>LISTA DE COSTURAS</Text>
                 </View>
+                <Text style={{fontSize: 10, color: '#999', marginTop: 10, textAlign: 'justify'}}>
+                    * Para editar um valor clique sobre o texto, altere e salve clicando no botão ao lado</Text>
                 <Lista />
             </View>
         </View>
@@ -40,23 +42,18 @@ export class Lista extends Component {
         this.ListarCosturas()
     }  
 
-    Editar = (id) => {
-        const banco = new Database()
-        banco.FindCostura(id).then(lista => { this.setState({ listaCosturas: lista }) })
-    }
-
     renderItem = ({item}) => {
         return (
             <ItemCostura key={item.id} item={item} id={item.id} Resumo={item.Resumo} 
             NomeCliente={item.NomeCliente} Telefone={item.Telefone} Descricao={item.Descricao} 
             Valor={item.Valor} DataEntrega={item.DataEntrega} Pago={item.Pago} Entregue={item.Entregue} 
-            deletar={this.DeletarCostura} editar={this.Editar} />
+            deletar={this.DeletarCostura} />
         )
     }
 
     render() {
         return (
-            <View style={{ marginTop: 10, marginBottom: 35 }}>
+            <View style={{flex: 1}}>
                 <FlatList data={this.state.listaCosturas} renderItem={this.renderItem}/>
             </View>
         )

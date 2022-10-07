@@ -78,7 +78,7 @@ const form = StyleSheet.create({
         fontSize: 15, fontWeight: '700', color: 'white', textAlign: 'center'
     },  
     text1: {
-        fontSize: 12, fontWeight: '400', color: '#999', textAlign: 'center'
+        fontSize: 12, color: '#999', textAlign: 'center'
     },    
     picker: {
         width: 250, color: '#999', 
@@ -91,7 +91,7 @@ const itemLista = StyleSheet.create({
         borderTopColor: '#F06EAA', borderTopWidth: 1
     },
     icon: {
-        width: 25, height: 25, tintColor: '#F06EAA', marginVertical: 5, 
+        width: 25, height: 25, tintColor: '#F06EAA', marginVertical: 5, marginStart: 2
     },
 })
 

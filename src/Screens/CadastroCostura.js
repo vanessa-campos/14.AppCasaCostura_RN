@@ -27,21 +27,26 @@ class Cadastro extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            Resumo: "", NomeCliente: "", Telefone: "", Descricao: "", open: false, listaCosturas: [],
-            Valor: 0, DataEntrega: new Date(), Pago: false, Entregue: false, PagoText: "", EntregueText: ""
+            Resumo: "Resumo", NomeCliente: "Cliente", Telefone: "xx xxxxx-xxxx",
+            Descricao: "descrição", Valor: "0", open: false, listaCosturas: [],
+            DataEntrega: new Date(), Pago: false, Entregue: false, PagoText: "não", EntregueText: "não"
         }
     }
 
     CadastrarCostura = (Resumo, NomeCliente, Telefone, Descricao, Valor, DataEntrega, Pago, Entregue) => {
-        const novaCostura = new Costura(
-            Resumo, NomeCliente, Telefone, Descricao, Valor, DataEntrega, Pago, Entregue)
+        const novaCostura = new Costura(Resumo, NomeCliente, Telefone, Descricao, Valor, 
+            DataEntrega, Pago, Entregue)
         const banco = new Database()
         banco.InserirCostura(novaCostura)
     }
 
-    CheckBools = () => {
-        this.state.Pago ? this.state.PagoText = "sim" : this.state.PagoText = "não"
-        this.state.Entregue ? this.state.EntregueText = "sim" : this.state.EntregueText = "não"
+    CheckPago = () => {
+        this.setState({ Pago: !this.state.Pago })
+        this.state.PagoText == "não" ? this.state.PagoText = "sim" : this.state.PagoText = "não"
+    }
+    CheckEntregue = () => {
+        this.setState({ Entregue: !this.state.Entregue })
+        this.state.EntregueText == "não" ? this.state.EntregueText = "sim" : this.state.EntregueText = "não"
     }
 
     render() {
@@ -72,29 +77,28 @@ class Cadastro extends Component {
                     onCancel={() => { this.setState({ open: false }) }}
                 />
                 <View style={form.input}>
-                    <Text style={form.text1}> Pago na hora                   Não  </Text>
+                    <Text style={form.text1}> Pago na hora                  Não  </Text>
                     <Switch
                         trackColor={{ false: "#999", true: "#FFCEE7" }}
                         thumbColor={this.state.Pago ? "#F06EAA" : "#FFCEE7"}
-                        onValueChange={() => {this.setState({ Pago: !this.state.Pago })}}
                         value={this.state.Pago}
+                        onValueChange={() => { this.CheckPago() }}
                     />
                     <Text style={form.text1}>Sim  </Text>
                 </View>
                 <View style={form.input}>
-                    <Text style={form.text1}> Entregue                           Não  </Text>
+                    <Text style={form.text1}> Entregue                          Não  </Text>
                     <Switch
                         trackColor={{ false: "#999", true: "#FFCEE7" }}
                         thumbColor={this.state.Entregue ? "#F06EAA" : "#FFCEE7"}
-                        onValueChange={() => {this.setState({ Entregue: !this.state.Entregue })}}
                         value={this.state.Entregue}
+                        onValueChange={() => { this.CheckEntregue() }}
                     />
                     <Text style={form.text1}>Sim  </Text>
                 </View>
 
                 <TouchableOpacity style={form.button}
                     onPress={() => {
-                        this.CheckBools()
                         this.CadastrarCostura(this.state.Resumo, this.state.NomeCliente,
                             this.state.Telefone, this.state.Descricao, this.state.Valor,
                             this.state.DataEntrega.toDateString(), this.state.PagoText,

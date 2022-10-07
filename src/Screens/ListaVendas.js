@@ -12,8 +12,10 @@ export default function ListaVendas({ navigation }) {
                     <TouchableOpacity onPress={() => navigation.navigate('Listas')}>
                         <Image source={require('../images/voltar.png')} style={form.icon} />
                     </TouchableOpacity>
-                    <Text style={form.title}>LISTA DE VENDAS</Text>
+                    <Text style={form.title}>LISTA DE VENDAS</Text>                    
                 </View>
+                <Text style={{fontSize: 10, color: '#999', marginTop: 10, textAlign: 'justify'}}>
+                    * Para editar um valor clique sobre o texto, altere e salve clicando no botão ao lado</Text>
                 <Lista />
             </View>
         </View>
@@ -36,7 +38,7 @@ export class Lista extends Component {
     DeletarVenda = (id) => {
         const banco = new Database()
         banco.DeletarVenda(id)
-        banco.ListarVendas().then(lista => { this.setState({ listaVendas: lista }) })
+        banco.ListarVendas()
     }
 
     renderItem = ({item}) => {
@@ -49,7 +51,7 @@ export class Lista extends Component {
 
     render() {
         return (
-            <View style={{ marginTop: 10, marginBottom: 35 }}>
+            <View style={{flex: 1}}>
                 <FlatList data={this.state.listaVendas} renderItem={this.renderItem}/>
             </View>
         )

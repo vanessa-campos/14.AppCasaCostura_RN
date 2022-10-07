@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import { Text, TouchableOpacity, View, TextInput, ScrollView, Image, StyleSheet } from 'react-native'
+import { Text, TouchableOpacity, View, TextInput, ScrollView, Image, StyleSheet, Alert } from 'react-native'
 import { form } from '../styles'
-import { RNCamera } from 'react-native-camera'
 import Database from '../database/Database'
 import Produto from '../models/Produto'
+import { RNCamera } from 'react-native-camera'
 import { launchImageLibrary } from "react-native-image-picker"
 import { Picker } from '@react-native-picker/picker'
 
@@ -31,8 +31,8 @@ export class Cadastro extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            Categoria: "", Nome: "", Descricao: "", Tamanho: "", Valor: "",
-            Unidade: "", Quantidade: "", Imagem: "", listaProdutos: []
+            Categoria: "Aviamentos", Nome: "Nome do Produto", Descricao: "Descrição", Tamanho: "Tamanho", 
+            Valor: "0", Unidade: "Und", Quantidade: "0", Imagem: "", listaProdutos: []
         }
     }
 
@@ -106,7 +106,6 @@ export class Cadastro extends Component {
                             <Picker.Item label="Metros" value="Metros" />
                         </Picker>
                     </View>
-
                     <TextInput style={style.input} placeholder=" Quantidade"
                         onChangeText={(valor) => { this.setState({ Quantidade: valor }) }} />
                     <TouchableOpacity style={form.button}
@@ -119,7 +118,6 @@ export class Cadastro extends Component {
                         <Text style={form.text}>Salvar</Text>
                     </TouchableOpacity>
                 </View>
-
                 <View style={style.container1}>
                     <Text style={cam.title}> FOTO DO PRODUTO </Text>
                     <RNCamera
